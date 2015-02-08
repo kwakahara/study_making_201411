@@ -73,10 +73,6 @@ public class KadaiUtil {
 
 			return textList;
 
-		} catch (FileNotFoundException e) {
-			throw new FileNotFoundException();
-		} catch (IOException e) {
-			throw new IOException();
 		}finally{
 			try{
 				if(null != inputStream){
