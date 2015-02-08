@@ -114,25 +114,4 @@ public class KadaiUtil {
 		}
 		return false;
 	}
-	
-	/**
-	 * 指定された文字コードかどうかの判定
-	 * @param src
-	 * @return
-	 */
-	public static boolean checkEncoding(byte[] src, String anEncoding){
-		if(null == src || null == anEncoding){
-			return false;
-		}
-		
-        try {
-            byte[] tmp = new String(src, anEncoding).getBytes(anEncoding);
-            return Arrays.equals(tmp, src);
-        }
-        catch(UnsupportedEncodingException e) {
-            return false;
-        }
-    }
-
-
 }
