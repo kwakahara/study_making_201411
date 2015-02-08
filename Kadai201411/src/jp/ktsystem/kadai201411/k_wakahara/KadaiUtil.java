@@ -37,9 +37,10 @@ public class KadaiUtil {
 		}
 		
 		FileInputStream inputStream = null;
+		InputStream is = null;
 		try {
 			inputStream = new FileInputStream(aFilePath);
-			InputStream is = inputStream;
+			is = inputStream;
 
 			// BOMチェック
 			if (!is.markSupported()) {
@@ -61,6 +62,8 @@ public class KadaiUtil {
 			// 以下ファイルを読み込み、リストに格納する処理
 			BufferedReader fileReader = new BufferedReader(
 					new InputStreamReader(is, anEncoding));
+			
+			is.close();
 
 			// ファイルを読み込み後に格納し、RETURNする
 			List<String> textList = new ArrayList<String>();
@@ -81,6 +84,9 @@ public class KadaiUtil {
 			try{
 				if(null != inputStream){
 					inputStream.close();
+				}
+				if(null != is){
+					is.close();
 				}
 			}catch (IOException e){
 				throw new IOException();
