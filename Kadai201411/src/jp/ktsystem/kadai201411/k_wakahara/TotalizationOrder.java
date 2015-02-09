@@ -131,27 +131,23 @@ public class TotalizationOrder {
 			if (STRING_BRANK.equals(aFileLineData[i])) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
-			try {
-				if (i == 3) {
-					if (!isMatch(aFileLineData[i], "^[0-9]+$")) {
-						throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
-					}
+			if (i == 3) {
+				if (!isMatch(aFileLineData[i], "^[0-9]+$")) {
+					throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 				}
-			} catch (NumberFormatException e) {
-				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
-		
-		if(!STRING_BRANK.equals(aFileLineData[4])){
+
+		if (!STRING_BRANK.equals(aFileLineData[4])) {
 			if (!isMatch(aFileLineData[4], "^[0-9]+$")) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
 	}
-	
+
 	public static boolean isMatch(String data, String ptn) {
-	    Pattern pattern = Pattern.compile(ptn);
-	    Matcher matcher = pattern.matcher(data);
-	    return matcher.matches();
+		Pattern pattern = Pattern.compile(ptn);
+		Matcher matcher = pattern.matcher(data);
+		return matcher.matches();
 	}
 }
