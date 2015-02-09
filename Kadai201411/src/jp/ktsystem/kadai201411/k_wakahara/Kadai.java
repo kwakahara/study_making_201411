@@ -21,19 +21,22 @@ public class Kadai {
 	 *            　出力フォルダ
 	 * @return
 	 */
-	public static int countOrder(String anOrderFileDir, String anOutputDir)
-			throws KadaiException {
-		// 読み取り
-		List<List<String>> textList = CheckAndReadFile
-				.checkFiles(anOrderFileDir);
-		// 集計
-		Map<String, String> totalizationDataMap = TotalizationOrder
-				.totalizationOrder(textList);
+	public static int countOrder(String anOrderFileDir, String anOutputDir) {
+		try {
+			// 読み取り
+			List<List<String>> textList = CheckAndReadFile
+					.checkFiles(anOrderFileDir);
+			// 集計
+			Map<String, String> totalizationDataMap = TotalizationOrder
+					.totalizationOrder(textList);
 
-		// 出力
-		int outputFileNumber = OutputOrderData.outputTextFile(anOutputDir,
-				totalizationDataMap);
+			// 出力
+			int outputFileNumber = OutputOrderData.outputTextFile(anOutputDir,
+					totalizationDataMap);
 
-		return outputFileNumber;
+			return outputFileNumber;
+		} catch (KadaiException e) {
+			return e.getErrorCode();
+		}
 	}
 }
