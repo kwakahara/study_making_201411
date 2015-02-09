@@ -149,7 +149,7 @@ public class TotalizationOrder {
 		}
 	}
 	
-	public static boolean isMatch(String data, String ptn) {
+	private static boolean isMatch(String data, String ptn) {
 	    Pattern pattern = Pattern.compile(ptn);
 	    Matcher matcher = pattern.matcher(data);
 	    return matcher.matches();
