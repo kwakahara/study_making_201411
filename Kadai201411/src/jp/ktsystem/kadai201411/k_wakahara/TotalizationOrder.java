@@ -19,7 +19,7 @@ import jp.ktsystem.kadai201411.common.KadaiException;
 public class TotalizationOrder {
 
 	private final static String STRING_BRANK = "";
-
+	private static Pattern pattern;
 	/**
 	 * データを集計するメソッド
 	 * 
@@ -150,7 +150,7 @@ public class TotalizationOrder {
 	}
 	
 	public static boolean isMatch(String data, String ptn) {
-	    Pattern pattern = Pattern.compile(ptn);
+	    pattern = Pattern.compile(ptn);
 	    Matcher matcher = pattern.matcher(data);
 	    return matcher.matches();
 	}
