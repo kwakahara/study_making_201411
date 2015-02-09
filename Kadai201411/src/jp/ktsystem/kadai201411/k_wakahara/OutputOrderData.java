@@ -1,8 +1,9 @@
 package jp.ktsystem.kadai201411.k_wakahara;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,6 +25,10 @@ public class OutputOrderData {
 	 * 出力ファイル名
 	 */
 	public final static String OUTPUT_FILE_NAME = "ordercount.out";
+	/**
+	 * エンコード
+	 */
+	private final static String ENCODING = "UTF-8";
 
 	/**
 	 * データをファイルに出力するクラス
@@ -48,8 +53,8 @@ public class OutputOrderData {
 		
 		sortMap(anOrdersDataMap);
 		
-		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
-				+ OUTPUT_FILE_NAME));) {
+		try(BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(anOutputDir+ OUTPUT_FILE_NAME), ENCODING));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
 				bw.write(data.getKey() + " , " + data.getValue());
