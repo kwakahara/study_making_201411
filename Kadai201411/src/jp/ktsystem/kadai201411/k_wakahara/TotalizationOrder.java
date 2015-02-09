@@ -89,12 +89,11 @@ public class TotalizationOrder {
 
 		Map<String, String[]> orderMap = new HashMap<String, String[]>();
 
-		for (int i = 0; i < aCheckList.size(); i++) {
-			List<String> fileData = aCheckList.get(i);
+		for (List<String> fileData: aCheckList) {
 
-			for (int j = 0; j < fileData.size(); j++) {
+			for (String str : fileData) {
 
-				String[] lineData = fileData.get(j).split(",", -1);
+				String[] lineData = str.split(",", -1);
 				// ファイルフォーマットチェック呼び出し
 				checkFileFormat(lineData);
 				// 製品名、数量を格納
