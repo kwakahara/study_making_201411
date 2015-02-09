@@ -42,7 +42,7 @@ public class OutputOrderData {
 	 */
 	public static int outputTextFile(String anOutputDir,
 			Map<String, String> anOrdersDataMap) throws KadaiException {
-		int count = 0;
+
 
 		if(null == anOutputDir){
 			throw new KadaiException(ErrorCode.QUESTION1_FILE_OUTPUT);
@@ -52,14 +52,13 @@ public class OutputOrderData {
 		}
 		
 		sortMap(anOrdersDataMap);
-		
 		try(BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(anOutputDir+ OUTPUT_FILE_NAME), ENCODING));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
 				bw.write(data.getKey() + " , " + data.getValue());
 				bw.newLine();
-				++count;
+				
 			}
 
 			bw.flush();
@@ -67,7 +66,7 @@ public class OutputOrderData {
 			throw new KadaiException(ErrorCode.QUESTION1_FILE_OUTPUT);
 		}
 
-		return count;
+		return anOrdersDataMap.size();
 	}
 
 	/**
