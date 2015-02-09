@@ -104,14 +104,14 @@ public class TotalizationOrder {
 				// ファイルフォーマットチェック呼び出し
 				checkFileFormat(lineData);
 				// 製品名、数量を格納
-				String[] oneOrderData = { lineData[2], lineData[3] };
-				if (orderMap.containsKey(lineData[0])) {
+				String[] oneOrderData = { lineData[manufactureName], lineData[orderNum] };
+				if (orderMap.containsKey(lineData[receiveId])) {
 					// すでに同じIDのものが存在しているならば削除し、新規に追加
-					orderMap.remove(lineData[0]);
-					orderMap.put(lineData[0], oneOrderData);
+					orderMap.remove(lineData[receiveId]);
+					orderMap.put(lineData[receiveId], oneOrderData);
 				} else {
 					// 同じIDが存在しなければ新規追加
-					orderMap.put(lineData[0], oneOrderData);
+					orderMap.put(lineData[receiveId], oneOrderData);
 				}
 			}
 		}
