@@ -138,7 +138,7 @@ public class TotalizationOrder {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 			try {
-				if (i == 3) {
+				if (i == orderNum) {
 					if (!isMatch(aFileLineData[i], "^[0-9]+$")) {
 						throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 					}
