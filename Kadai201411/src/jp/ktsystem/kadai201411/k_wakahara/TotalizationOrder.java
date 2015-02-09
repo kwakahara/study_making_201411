@@ -19,6 +19,12 @@ import jp.ktsystem.kadai201411.common.KadaiException;
 public class TotalizationOrder {
 
 	private final static String STRING_BRANK = "";
+	
+	private static int receiveId = 0;
+	private static int customerName = 1;
+	private static int manufactureName = 2;
+	private static int orderNum = 3;
+	private static int paymentDate = 4;
 
 	/**
 	 * データを集計するメソッド
@@ -43,15 +49,15 @@ public class TotalizationOrder {
 		Map<String, String> totalizationMap = new HashMap<String, String>();
 		for (Entry<String, String[]> order : orderMap.entrySet()) {
 			// 製品名、数量を格納
-			if (totalizationMap.containsKey(order.getValue()[0])) {
+			if (totalizationMap.containsKey(order.getValue()[receiveId])) {
 				// すでに同じ製品名が存在しているならば加算
 				int orderNumber = calcSum(
-						totalizationMap.get(order.getValue()[0]),
-						order.getValue()[1]);
-				totalizationMap.put(order.getValue()[0],
+						totalizationMap.get(order.getValue()[receiveId]),
+						order.getValue()[customerName]);
+				totalizationMap.put(order.getValue()[receiveId],
 						String.valueOf(orderNumber));
 			} else {
-				totalizationMap.put(order.getValue()[0], order.getValue()[1]);
+				totalizationMap.put(order.getValue()[receiveId], order.getValue()[customerName]);
 			}
 		}
 		return totalizationMap;
@@ -98,14 +104,14 @@ public class TotalizationOrder {
 				// ファイルフォーマットチェック呼び出し
 				checkFileFormat(lineData);
 				// 製品名、数量を格納
-				String[] oneOrderData = { lineData[2], lineData[3] };
-				if (orderMap.containsKey(lineData[0])) {
+				String[] oneOrderData = { lineData[manufactureName], lineData[orderNum] };
+				if (orderMap.containsKey(lineData[receiveId])) {
 					// すでに同じIDのものが存在しているならば削除し、新規に追加
-					orderMap.remove(lineData[0]);
-					orderMap.put(lineData[0], oneOrderData);
+					orderMap.remove(lineData[receiveId]);
+					orderMap.put(lineData[receiveId], oneOrderData);
 				} else {
 					// 同じIDが存在しなければ新規追加
-					orderMap.put(lineData[0], oneOrderData);
+					orderMap.put(lineData[receiveId], oneOrderData);
 				}
 			}
 		}
@@ -142,8 +148,8 @@ public class TotalizationOrder {
 			}
 		}
 		
-		if(!STRING_BRANK.equals(aFileLineData[4])){
-			if (!isMatch(aFileLineData[4], "^[0-9]+$")) {
+		if(!STRING_BRANK.equals(aFileLineData[paymentDate])){
+			if (!isMatch(aFileLineData[paymentDate], "^[0-9]+$")) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
