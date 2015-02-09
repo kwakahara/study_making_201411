@@ -72,8 +72,7 @@ public class OutputOrderData {
 	 *            ソートするマップ
 	 */
 	public static void sortMap(Map<String, String> aSortMap) {
-		List<Map.Entry<String, String>> entries = new ArrayList<Map.Entry<String, String>>(
-				aSortMap.entrySet());
+		List<Map.Entry<String, String>> entries = new ArrayList<>(aSortMap.entrySet());
 		Collections.sort(entries, new Comparator<Map.Entry<String, String>>() {
 
 			@Override
