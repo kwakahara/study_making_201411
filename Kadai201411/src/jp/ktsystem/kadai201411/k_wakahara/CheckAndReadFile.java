@@ -25,6 +25,10 @@ public class CheckAndReadFile {
 	 * 拡張子
 	 */
 	private final static String SUFFIX = "txt";
+	/**
+	 * ファイル先頭文字列
+	 */
+	private final static String TOP_FILE_NAME = "order";
 
 	/**
 	 * フォルダの中身をチェックするメソッド
@@ -50,7 +54,7 @@ public class CheckAndReadFile {
 		for (int i = 0; i < files.length; i++) {
 			// フォルダの中身をチェック
 			String filePath = files[i].toString();
-			if (KadaiUtil.checkSuffix(filePath, SUFFIX)) {
+			if (KadaiUtil.checkSuffix(filePath, SUFFIX, TOP_FILE_NAME)) {
 				// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
 				returnTextList.add(KadaiUtil.readFile(filePath, ENCODING));
 			}

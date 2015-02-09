@@ -11,6 +11,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 課題のUtilクラス
@@ -89,12 +91,13 @@ public class KadaiUtil {
 	}
 
 	/**
-	 * ファイル名から拡張子が指定のものかどうかをチェックするメソッド
-	 * @param aFileName	：ファイル名
-	 * @param aSuffix	：指定拡張子
+	 * ファイル名から先頭文字列と拡張子が指定のものかどうかをチェックするメソッド
+	 * @param aFileName		：ファイル名
+	 * @param aSuffix		：指定拡張子
+	 * @param aTopFileName	：ファイル先頭文字列
 	 * @return 拡張子が指定のものならばTrue,それ以外はFalse
 	 */
-	public static boolean checkSuffix(String aFileName, String aSuffix) {
+	public static boolean checkSuffix(String aFileName, String aSuffix, String aTopFileName) {
 		// ファイル名nullチェック
 		if (null == aFileName) {
 			return false;
@@ -104,15 +107,11 @@ public class KadaiUtil {
 			return false;
 		}
 		
-		// 最後の「.」の位置
-		int lastDotPosition = aFileName.lastIndexOf(".");
-		// .の位置の次を拡張子として見る
-		if (lastDotPosition != -1) {
-			if (aSuffix.equals(aFileName.substring(lastDotPosition + 1))) {
-				return true;
-			}
-		}
-		return false;
+		//判定するパターンを生成
+        Pattern ptn = Pattern.compile(aTopFileName+".*."+aSuffix+"$");
+        Matcher match = ptn.matcher(aFileName);
+
+		return match.find();
 	}
 	
 	/**
