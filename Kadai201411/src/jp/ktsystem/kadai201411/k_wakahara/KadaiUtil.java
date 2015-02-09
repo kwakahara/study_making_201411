@@ -95,7 +95,7 @@ public class KadaiUtil {
 	 * @param aFileName		：ファイル名
 	 * @param aSuffix		：指定拡張子
 	 * @param aTopFileName	：ファイル先頭文字列
-	 * @return 拡張子が指定のものならばTrue,それ以外はFalse
+	 * @return ファイルの先頭文字列と拡張子が指定のものならばTrue,それ以外はFalse
 	 */
 	public static boolean checkSuffix(String aFileName, String aSuffix, String aTopFileName) {
 		// ファイル名nullチェック
