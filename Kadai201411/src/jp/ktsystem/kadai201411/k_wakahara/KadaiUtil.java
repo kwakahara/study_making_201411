@@ -11,6 +11,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 課題のUtilクラス
@@ -103,16 +105,11 @@ public class KadaiUtil {
 		if (null == aSuffix){
 			return false;
 		}
-		
-		// 最後の「.」の位置
-		int lastDotPosition = aFileName.lastIndexOf(".");
-		// .の位置の次を拡張子として見る
-		if (lastDotPosition != -1) {
-			if (aSuffix.equals(aFileName.substring(lastDotPosition + 1))) {
-				return true;
-			}
-		}
-		return false;
+		//判定するパターンを生成
+        Pattern ptn = Pattern.compile(".*"+aSuffix+"$");
+        Matcher match = ptn.matcher(aFileName);
+
+		return match.find();
 	}
 	
 	/**
