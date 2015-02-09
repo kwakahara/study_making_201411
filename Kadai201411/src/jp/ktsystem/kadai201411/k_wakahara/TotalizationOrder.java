@@ -18,7 +18,6 @@ import jp.ktsystem.kadai201411.common.KadaiException;
  */
 public class TotalizationOrder {
 
-	private final static String STRING_BRANK = "";
 
 	/**
 	 * データを集計するメソッド
@@ -128,7 +127,7 @@ public class TotalizationOrder {
 
 		// 納期以外がブランクの場合はフォーマットエラー
 		for (int i = 0; i < aFileLineData.length - 1; i++) {
-			if (STRING_BRANK.equals(aFileLineData[i])) {
+			if (aFileLineData[i].isEmpty()) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 			try {
@@ -142,7 +141,7 @@ public class TotalizationOrder {
 			}
 		}
 		
-		if(!STRING_BRANK.equals(aFileLineData[4])){
+		if(!aFileLineData[4].isEmpty()){
 			if (!isMatch(aFileLineData[4], "^[0-9]+$")) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
