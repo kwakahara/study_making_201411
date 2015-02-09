@@ -28,7 +28,7 @@ public class TotalizationOrder {
 	 * @return : 商品ごとの集計Map
 	 * @throws KadaiException
 	 */
-	public static Map<String, String> totalizationOrder(
+	public static Map<String, String> totalizationOrderData(
 			List<List<String>> anOrderFileList) throws KadaiException {
 
 		// 引数nullチェック

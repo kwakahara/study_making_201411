@@ -28,7 +28,7 @@ public class Kadai {
 				.checkFiles(anOrderFileDir);
 		// 集計
 		Map<String, String> totalizationDataMap = TotalizationOrder
-				.totalizationOrder(textList);
+				.totalizationOrderData(textList);
 
 		// 出力
 		int outputFileNumber = OutputOrderData.outputTextFile(anOutputDir,
