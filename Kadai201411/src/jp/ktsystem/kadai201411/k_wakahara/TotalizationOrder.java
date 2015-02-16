@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jp.ktsystem.kadai201411.common.ErrorCode;
@@ -19,7 +18,9 @@ import jp.ktsystem.kadai201411.common.KadaiException;
 public class TotalizationOrder {
 
 	private final static String STRING_BRANK = "";
-	private static Pattern pattern;
+	private static Pattern PATTERN_QUANTITY = Pattern.compile("^[0-9]+$");
+	private static Pattern PATTERN_DELIVERY_DATE = Pattern.compile("^[0-9]+$");
+	
 	/**
 	 * データを集計するメソッド
 	 * 
@@ -133,7 +134,7 @@ public class TotalizationOrder {
 			}
 			try {
 				if (i == 3) {
-					if (!isMatch(aFileLineData[i], "^[0-9]+$")) {
+					if (!PATTERN_QUANTITY.matcher(aFileLineData[i]).matches()) {
 						throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 					}
 				}
@@ -143,15 +144,9 @@ public class TotalizationOrder {
 		}
 		
 		if(!STRING_BRANK.equals(aFileLineData[4])){
-			if (!isMatch(aFileLineData[4], "^[0-9]+$")) {
+			if (!PATTERN_DELIVERY_DATE.matcher(aFileLineData[4]).matches()) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
-	}
-	
-	public static boolean isMatch(String data, String ptn) {
-	    pattern = Pattern.compile(ptn);
-	    Matcher matcher = pattern.matcher(data);
-	    return matcher.matches();
 	}
 }
