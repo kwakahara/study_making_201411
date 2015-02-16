@@ -20,11 +20,11 @@ public class TotalizationOrder {
 
 	private final static String STRING_BRANK = "";
 	
-	private static int receiveId = 0;
-	private static int customerName = 1;
-	private static int manufactureName = 2;
-	private static int orderNum = 3;
-	private static int paymentDate = 4;
+	private static int RECEIVE_ID = 0;
+	private static int CUSTOMER_NAME = 1;
+	private static int MANUFACTURE_NAME = 2;
+	private static int ORDER_NUM = 3;
+	private static int PAYMENT_DATE = 4;
 
 	/**
 	 * データを集計するメソッド
@@ -49,15 +49,15 @@ public class TotalizationOrder {
 		Map<String, String> totalizationMap = new HashMap<String, String>();
 		for (Entry<String, String[]> order : orderMap.entrySet()) {
 			// 製品名、数量を格納
-			if (totalizationMap.containsKey(order.getValue()[receiveId])) {
+			if (totalizationMap.containsKey(order.getValue()[RECEIVE_ID])) {
 				// すでに同じ製品名が存在しているならば加算
 				int orderNumber = calcSum(
-						totalizationMap.get(order.getValue()[receiveId]),
-						order.getValue()[customerName]);
-				totalizationMap.put(order.getValue()[receiveId],
+						totalizationMap.get(order.getValue()[RECEIVE_ID]),
+						order.getValue()[CUSTOMER_NAME]);
+				totalizationMap.put(order.getValue()[RECEIVE_ID],
 						String.valueOf(orderNumber));
 			} else {
-				totalizationMap.put(order.getValue()[receiveId], order.getValue()[customerName]);
+				totalizationMap.put(order.getValue()[RECEIVE_ID], order.getValue()[CUSTOMER_NAME]);
 			}
 		}
 		return totalizationMap;
@@ -104,14 +104,14 @@ public class TotalizationOrder {
 				// ファイルフォーマットチェック呼び出し
 				checkFileFormat(lineData);
 				// 製品名、数量を格納
-				String[] oneOrderData = { lineData[manufactureName], lineData[orderNum] };
-				if (orderMap.containsKey(lineData[receiveId])) {
+				String[] oneOrderData = { lineData[MANUFACTURE_NAME], lineData[ORDER_NUM] };
+				if (orderMap.containsKey(lineData[RECEIVE_ID])) {
 					// すでに同じIDのものが存在しているならば削除し、新規に追加
-					orderMap.remove(lineData[receiveId]);
-					orderMap.put(lineData[receiveId], oneOrderData);
+					orderMap.remove(lineData[RECEIVE_ID]);
+					orderMap.put(lineData[RECEIVE_ID], oneOrderData);
 				} else {
 					// 同じIDが存在しなければ新規追加
-					orderMap.put(lineData[receiveId], oneOrderData);
+					orderMap.put(lineData[RECEIVE_ID], oneOrderData);
 				}
 			}
 		}
@@ -148,8 +148,8 @@ public class TotalizationOrder {
 			}
 		}
 		
-		if(!STRING_BRANK.equals(aFileLineData[paymentDate])){
-			if (!isMatch(aFileLineData[paymentDate], "^[0-9]+$")) {
+		if(!STRING_BRANK.equals(aFileLineData[PAYMENT_DATE])){
+			if (!isMatch(aFileLineData[PAYMENT_DATE], "^[0-9]+$")) {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
