@@ -58,7 +58,7 @@ public class CheckAndReadFile {
 				// フォルダの中身をチェック
 				String filePath = files[i].toString();
 				if (KadaiUtil.checkSuffix(filePath, SUFFIX, TOP_FILE_NAME)) {
-					// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
+					// ファイルの拡張子が「txt」、ファイルの先頭文字列が「order」の場合のみ読みこみ処理を実行
 					returnTextList.add(KadaiUtil.readFile(filePath, ENCODING));
 				}
 			}
