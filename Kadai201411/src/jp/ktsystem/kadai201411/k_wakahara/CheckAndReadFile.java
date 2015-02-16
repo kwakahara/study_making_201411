@@ -71,19 +71,6 @@ public class CheckAndReadFile {
 		if (null == files) {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
 		}
-
-		try {
-			for (int i = 0; i < files.length; i++) {
-				// フォルダの中身をチェック
-				String filePath = files[i].toString();
-				if (KadaiUtil.checkSuffix(filePath, SUFFIX)) {
-					// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
-					returnTextList.add(KadaiUtil.readFile(filePath, ENCODING));
-				}
-			}
-		} catch (IOException e) {
-			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
-		}
 		return returnTextList;
 	}
 }
