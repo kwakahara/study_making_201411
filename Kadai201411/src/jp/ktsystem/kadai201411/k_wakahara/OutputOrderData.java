@@ -52,7 +52,7 @@ public class OutputOrderData {
 				+ OUTPUT_FILE_NAME));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
-				bw.write(data.getKey() + " , " + data.getValue());
+				bw.write(data.getKey() + "," + data.getValue());
 				bw.newLine();
 				++count;
 			}
