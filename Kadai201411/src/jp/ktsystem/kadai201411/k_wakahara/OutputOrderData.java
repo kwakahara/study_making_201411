@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import jp.ktsystem.kadai201411.common.ErrorCode;
 import jp.ktsystem.kadai201411.common.KadaiException;
@@ -47,6 +48,12 @@ public class OutputOrderData {
 		}
 		
 		sortMap(anOrdersDataMap);
+		
+		// 最後がスラッシュで終わっていないなら追加
+		Pattern pattern = Pattern.compile("/$");
+		if(!pattern.matcher(anOutputDir).matches()){
+			anOutputDir = anOutputDir + "/" ;
+		}
 		
 		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
 				+ OUTPUT_FILE_NAME));) {
