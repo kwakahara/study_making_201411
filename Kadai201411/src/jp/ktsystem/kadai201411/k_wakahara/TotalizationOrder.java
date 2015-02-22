@@ -20,11 +20,11 @@ public class TotalizationOrder {
 
 	private final static String STRING_BRANK = "";
 	
-	private static int RECEIVE_ID = 0;
-	private static int CUSTOMER_NAME = 1;
-	private static int MANUFACTURE_NAME = 2;
-	private static int ORDER_NUM = 3;
-	private static int PAYMENT_DATE = 4;
+	private static final int RECEIVE_ID = 0;
+	private static final int CUSTOMER_NAME = 1;
+	private static final int MANUFACTURE_NAME = 2;
+	private static final int ORDER_NUM = 3;
+	private static final int PAYMENT_DATE = 4;
 
 	/**
 	 * データを集計するメソッド
