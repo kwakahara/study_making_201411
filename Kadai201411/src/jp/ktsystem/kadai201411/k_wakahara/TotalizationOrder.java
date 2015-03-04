@@ -96,16 +96,17 @@ public class TotalizationOrder {
 
 				String[] lineData = fileData.get(j).split(",", -1);
 				// ファイルフォーマットチェック呼び出し
-				checkFileFormat(lineData);
-				// 製品名、数量を格納
-				String[] oneOrderData = { lineData[2], lineData[3] };
-				if (orderMap.containsKey(lineData[0])) {
-					// すでに同じIDのものが存在しているならば削除し、新規に追加
-					orderMap.remove(lineData[0]);
-					orderMap.put(lineData[0], oneOrderData);
-				} else {
-					// 同じIDが存在しなければ新規追加
-					orderMap.put(lineData[0], oneOrderData);
+				if(checkFileFormat(lineData)){
+					// 製品名、数量を格納
+					String[] oneOrderData = { lineData[2], lineData[3] };
+					if (orderMap.containsKey(lineData[0])) {
+						// すでに同じIDのものが存在しているならば削除し、新規に追加
+						orderMap.remove(lineData[0]);
+						orderMap.put(lineData[0], oneOrderData);
+					} else {
+						// 同じIDが存在しなければ新規追加
+						orderMap.put(lineData[0], oneOrderData);
+					}
 				}
 			}
 		}
@@ -113,14 +114,20 @@ public class TotalizationOrder {
 		return orderMap;
 	}
 
+	
 	/**
 	 * ファイルのフォーマットチェックメソッド
-	 * 
 	 * @param aFileLineData
+	 * @return フォーマットに問題がなければtrue
 	 * @throws KadaiException
 	 */
-	private static void checkFileFormat(String[] aFileLineData)
+	private static boolean checkFileFormat(String[] aFileLineData)
 			throws KadaiException {
+		
+		if(aFileLineData.length==1 && aFileLineData[0].isEmpty()){
+			return false;
+		}
+		
 		// 要素が5個ではない場合フォーマットエラー
 		if (aFileLineData.length != 5) {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
@@ -147,6 +154,8 @@ public class TotalizationOrder {
 				throw new KadaiException(ErrorCode.SALES_ORDER_FILE_FORMAT);
 			}
 		}
+		
+		return true;
 	}
 	
 	public static boolean isMatch(String data, String ptn) {
