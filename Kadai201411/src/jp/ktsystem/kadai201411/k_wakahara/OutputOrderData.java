@@ -46,12 +46,12 @@ public class OutputOrderData {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
 		}
 		
-		sortMap(anOrdersDataMap);
+		List<Map.Entry<String, String>> entries = sortMap(anOrdersDataMap);
 		
 		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
 				+ OUTPUT_FILE_NAME));) {
-
-			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
+			
+			for (Map.Entry<String, String> data : entries) {
 				bw.write(data.getKey() + " , " + data.getValue());
 				bw.newLine();
 				++count;
@@ -71,7 +71,7 @@ public class OutputOrderData {
 	 * @param aSortMap
 	 *            ソートするマップ
 	 */
-	public static void sortMap(Map<String, String> aSortMap) {
+	public static List<Map.Entry<String, String>> sortMap(Map<String, String> aSortMap) {
 		List<Map.Entry<String, String>> entries = new ArrayList<Map.Entry<String, String>>(
 				aSortMap.entrySet());
 		Collections.sort(entries, new Comparator<Map.Entry<String, String>>() {
@@ -82,6 +82,8 @@ public class OutputOrderData {
 				return entry2.getValue().compareTo(entry1.getValue());
 			}
 		});
+		
+		return entries;
 
 	}
 }
