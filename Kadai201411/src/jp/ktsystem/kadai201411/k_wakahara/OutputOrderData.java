@@ -25,6 +25,8 @@ public class OutputOrderData {
 	 * 出力ファイル名
 	 */
 	public final static String OUTPUT_FILE_NAME = "ordercount.out";
+	private final static String FOLDER_PATTERN = ".*(/|\\\\)$";
+	private final static String SLASH = "/";
 
 	/**
 	 * データをファイルに出力するクラス
@@ -50,16 +52,16 @@ public class OutputOrderData {
 		sortMap(anOrdersDataMap);
 		
 		// 最後がスラッシュで終わっていないなら追加
-		Pattern pattern = Pattern.compile("/$");
+		Pattern pattern = Pattern.compile("FOLDER_PATTERN");
 		if(!pattern.matcher(anOutputDir).matches()){
-			anOutputDir = anOutputDir + "/" ;
+			anOutputDir = anOutputDir + SLASH;
 		}
 		
 		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
 				+ OUTPUT_FILE_NAME));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
-				bw.write(data.getKey() + " , " + data.getValue());
+				bw.write(data.getKey() + "," + data.getValue());
 				bw.newLine();
 				++count;
 			}

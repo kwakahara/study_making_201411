@@ -50,7 +50,7 @@ public class KadaiTest201411_Lv1 extends AbstractTestKadaiForFileLv1{
 	protected void executeValidTest(String aFolderName, int aRecordCount) {
 		try {
 			Assert.assertEquals(aRecordCount, Kadai.countOrder(getInputDirPath() + aFolderName + "\\", getOutputDirPath() + aFolderName + "\\"));
-			compareToSample(aFolderName, "ordercount.txt");
+			compareToSample(aFolderName, "ordercount.out");
 		} catch (KadaiException e) {
 			throw new RuntimeException(e);
 		}

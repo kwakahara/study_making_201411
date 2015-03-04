@@ -63,7 +63,7 @@ public class KadaiUtil {
 			BufferedReader fileReader = new BufferedReader(
 					new InputStreamReader(is, anEncoding));
 			
-			is.close();
+			
 
 			// ファイルを読み込み後に格納し、RETURNする
 			List<String> textList = new ArrayList<String>();
@@ -72,6 +72,7 @@ public class KadaiUtil {
 				textList.add(str);
 			}
 			
+			is.close();
 			fileReader.close();
 
 			return textList;
