@@ -74,11 +74,13 @@ public class CheckAndReadFile {
 
 		try {
 			for (int i = 0; i < files.length; i++) {
-				// フォルダの中身をチェック
-				String filePath = files[i].toString();
-
-				// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
-				returnTextList.add(KadaiUtil.readFile(filePath, ENCODING));
+				if(!files[i].isDirectory()){
+					// フォルダの中身をチェック
+					String filePath = files[i].toString();
+	
+					// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
+					returnTextList.add(KadaiUtil.readFile(filePath, ENCODING));
+				}
 			}
 		} catch (IOException e) {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
