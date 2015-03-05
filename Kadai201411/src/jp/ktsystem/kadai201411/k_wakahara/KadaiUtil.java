@@ -94,6 +94,7 @@ public class KadaiUtil {
 	 * @param aSuffix	：指定拡張子
 	 * @return 拡張子が指定のものならばTrue,それ以外はFalse
 	 */
+	/*
 	public static boolean checkSuffix(String aFileName, String aSuffix) {
 		// ファイル名nullチェック
 		if (null == aFileName) {
@@ -114,7 +115,7 @@ public class KadaiUtil {
 		}
 		return false;
 	}
-	
+	*/
 	/**
 	 * 指定された文字コードかどうかの判定
 	 * @param src
