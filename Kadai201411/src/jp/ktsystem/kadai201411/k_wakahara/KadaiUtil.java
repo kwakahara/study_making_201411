@@ -89,33 +89,6 @@ public class KadaiUtil {
 	}
 
 	/**
-	 * ファイル名から拡張子が指定のものかどうかをチェックするメソッド
-	 * @param aFileName	：ファイル名
-	 * @param aSuffix	：指定拡張子
-	 * @return 拡張子が指定のものならばTrue,それ以外はFalse
-	 */
-	public static boolean checkSuffix(String aFileName, String aSuffix) {
-		// ファイル名nullチェック
-		if (null == aFileName) {
-			return false;
-		}
-		// 拡張子名nullチェック
-		if (null == aSuffix){
-			return false;
-		}
-		
-		// 最後の「.」の位置
-		int lastDotPosition = aFileName.lastIndexOf(".");
-		// .の位置の次を拡張子として見る
-		if (lastDotPosition != -1) {
-			if (aSuffix.equals(aFileName.substring(lastDotPosition + 1))) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	/**
 	 * 指定された文字コードかどうかの判定
 	 * @param src
 	 * @return
