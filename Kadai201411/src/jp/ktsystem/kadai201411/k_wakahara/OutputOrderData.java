@@ -52,11 +52,11 @@ public class OutputOrderData {
 				+ OUTPUT_FILE_NAME));) {
 			
 			for (Map.Entry<String, String> data : entries) {
-				bw.write(data.getKey() + " , " + data.getValue());
+				bw.write(data.getKey() + "," + data.getValue());
 				bw.newLine();
 				++count;
 			}
-
+			
 			bw.flush();
 		} catch (IOException e) {
 			throw new KadaiException(ErrorCode.QUESTION1_FILE_OUTPUT);
@@ -79,7 +79,9 @@ public class OutputOrderData {
 			@Override
 			public int compare(Entry<String, String> entry1,
 					Entry<String, String> entry2) {
-				return entry2.getValue().compareTo(entry1.getValue());
+				int num = entry1.getValue().compareTo(entry2.getValue());
+				System.out.println(num);
+				return num;
 			}
 		});
 		
