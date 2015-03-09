@@ -75,7 +75,6 @@ public class OutputOrderData {
 		List<Map.Entry<String, String>> entries = new ArrayList<Map.Entry<String, String>>(
 				aSortMap.entrySet());
 		Collections.sort(entries, new Comparator<Map.Entry<String, String>>() {
-
 			@Override
 			public int compare(Entry<String, String> entry1,
 					Entry<String, String> entry2) {
