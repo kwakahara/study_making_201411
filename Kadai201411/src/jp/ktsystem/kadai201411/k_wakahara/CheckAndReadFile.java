@@ -4,15 +4,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import jp.ktsystem.kadai201411.common.ErrorCode;
 import jp.ktsystem.kadai201411.common.KadaiException;
-import jp.ktsystem.kadai201411.k_wakahara.KadaiUtil;
 
 /**
  * フォルダの中身のtxtファイルを リストとして取得するクラス
@@ -75,8 +71,10 @@ public class CheckAndReadFile {
 		if (null == files) {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
 		}
-
-		List<String> fileNameList = new ArrayList<String>();
+		
+		Arrays.sort(files);
+		
+		/*List<String> fileNameList = new ArrayList<String>();
 		for (File file : files) {
 			if (!file.isDirectory()) {
 				fileNameList.add(file.toString());
@@ -89,12 +87,12 @@ public class CheckAndReadFile {
 			public int compare(String entry1, String entry2) {
 				return entry1.compareToIgnoreCase(entry2);
 			}
-		});
+		});*/
 
 		try {
-			for (int i = 0; i < fileNameList.size(); i++) {
+			for (int i = 0; i < files.length; i++) {
 				// ファイルの拡張子が「txt」の場合のみ読みこみ処理を実行
-				returnTextList.add(KadaiUtil.readFile(fileNameList.get(i),
+				returnTextList.add(KadaiUtil.readFile(files[i].toString(),
 						ENCODING));
 			}
 		} catch (IOException e) {
