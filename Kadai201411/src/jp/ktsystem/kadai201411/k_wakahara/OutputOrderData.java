@@ -1,6 +1,7 @@
 package jp.ktsystem.kadai201411.k_wakahara;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,14 +52,14 @@ public class OutputOrderData {
 		
 		sortMap(anOrdersDataMap);
 		
-		// 最後がスラッシュで終わっていないなら追加
+		/*// 最後がスラッシュで終わっていないなら追加
 		Pattern pattern = Pattern.compile("FOLDER_PATTERN");
 		if(!pattern.matcher(anOutputDir).matches()){
 			anOutputDir = anOutputDir + SLASH;
-		}
+		}*/
 		
-		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
-				+ OUTPUT_FILE_NAME));) {
+		File file = new File(anOutputDir + OUTPUT_FILE_NAME);
+		try(BufferedWriter bw= new BufferedWriter(new FileWriter(file));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
 				bw.write(data.getKey() + "," + data.getValue());
