@@ -53,6 +53,9 @@ public class KadaiUtil {
 				// BOMチェック
 				byte b[] = { 0, 0, 0 };
 				is.read(b, 0, 3);
+				if(!isUTF8(b, anEncoding)){
+					throw new IOException();
+				}
 				if ((byte) 0xEF != b[0] || (byte) 0xBB != b[1]
 						|| (byte) 0xBF != b[2]) {
 					// BOMでない場合は先頭まで巻き戻す
@@ -60,6 +63,8 @@ public class KadaiUtil {
 				}
 			}
 
+			
+			
 			// 以下ファイルを読み込み、リストに格納する処理
 			BufferedReader fileReader = new BufferedReader(
 					new InputStreamReader(is, anEncoding));
@@ -106,5 +111,23 @@ public class KadaiUtil {
         Matcher match = ptn.matcher(aFileName);
 
 		return match.find();
+	}
+	
+	/**
+	 * UTF-8かどうかを判定するメソッド
+	 * @param src
+	 * @param encode
+	 * @return　UTF-8ならTRUE
+	 */
+	public static boolean isUTF8(byte[] src ,String encode){
+		if(null == src || null == encode){
+			return false;
+		}
+		try{
+			byte[] testEncoding = new String(src, encode).getBytes(encode);
+			return Arrays.equals(testEncoding, src);
+		}catch(UnsupportedEncodingException e){
+			return false;
+		} 
 	}
 }

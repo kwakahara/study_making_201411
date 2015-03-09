@@ -2,7 +2,9 @@ package jp.ktsystem.kadai201411.k_wakahara;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import jp.ktsystem.kadai201411.common.ErrorCode;
@@ -63,4 +65,5 @@ public class CheckAndReadFile {
 		}
 		return returnTextList;
 	}
+	
 }
