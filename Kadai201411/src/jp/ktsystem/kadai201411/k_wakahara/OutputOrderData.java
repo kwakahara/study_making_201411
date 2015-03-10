@@ -23,7 +23,7 @@ public class OutputOrderData {
 	/**
 	 * 出力ファイル名
 	 */
-	public final static String OUTPUT_FILE_NAME = "ordercount.out";
+	private final static String OUTPUT_FILE_NAME = "ordercount.out";
 
 	/**
 	 * データをファイルに出力するクラス
