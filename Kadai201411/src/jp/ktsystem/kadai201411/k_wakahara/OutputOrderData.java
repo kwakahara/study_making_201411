@@ -81,7 +81,6 @@ public class OutputOrderData {
 			public int compare(Entry<String, String> entry1,
 					Entry<String, String> entry2) {
 				int num = entry1.getValue().compareTo(entry2.getValue());
-				System.out.println(num);
 				return num;
 			}
 		});
