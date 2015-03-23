@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 import jp.ktsystem.kadai201411.common.ErrorCode;
 import jp.ktsystem.kadai201411.common.KadaiException;
@@ -26,8 +25,8 @@ public class OutputOrderData {
 	 * 出力ファイル名
 	 */
 	public final static String OUTPUT_FILE_NAME = "ordercount.out";
-	private final static String FOLDER_PATTERN = ".*(/|\\\\)$";
-	private final static String SLASH = "/";
+	//private final static String FOLDER_PATTERN = ".*(/|\\\\)$";
+	//private final static String SLASH = "/";
 
 	/**
 	 * データをファイルに出力するクラス
@@ -58,8 +57,8 @@ public class OutputOrderData {
 			anOutputDir = anOutputDir + SLASH;
 		}*/
 		
-		File file = new File(anOutputDir + OUTPUT_FILE_NAME);
-		try(BufferedWriter bw= new BufferedWriter(new FileWriter(file));) {
+		
+		try(BufferedWriter bw= new BufferedWriter(new FileWriter(new File(anOutputDir,OUTPUT_FILE_NAME)));) {
 
 			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
 				bw.write(data.getKey() + "," + data.getValue());
