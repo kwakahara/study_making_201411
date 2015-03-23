@@ -1,8 +1,6 @@
-import jp.ktsystem.kadai201411.common.KadaiException;
-import jp.ktsystem.kadai201411.k_wakahara.Kadai;
 
 public class Launch {
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		final String DirPath = "TestDir//";
 
 		for (int i = 1; i <= 1; i++) {
@@ -13,7 +11,7 @@ public class Launch {
 			} catch (KadaiException e) {
 				System.out.println("Error No00"+i+":"+ e.getErrorCode());
 			}
-		}
+		}/*
 /*		
 		try {
 			System.out.println("No101:"+Kadai.countOrder("", DirPath + "/Output/G01T101/"));
@@ -38,7 +36,7 @@ public class Launch {
 				System.out.println("Error No10"+i+":"+ e.getErrorCode());
 			}
 		}
-*/
+
 		for (int i = 10; i <= 19; i++) {
 			try {
 				System.out.println("No1"+ i +":"+Kadai.countOrder(DirPath + "/Input"
@@ -48,5 +46,5 @@ public class Launch {
 				System.out.println("Error No1"+i+":"+ e.getErrorCode());
 			}
 		}
-	}
+	}*/
 }

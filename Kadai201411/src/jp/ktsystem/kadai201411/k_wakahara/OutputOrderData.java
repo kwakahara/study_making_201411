@@ -1,8 +1,10 @@
 package jp.ktsystem.kadai201411.k_wakahara;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,7 +26,11 @@ public class OutputOrderData {
 	 * 出力ファイル名
 	 */
 	private final static String OUTPUT_FILE_NAME = "ordercount.out";
-
+	/**
+	 * エンコード
+	 */
+	private final static String ENCODING = "UTF-8";
+	
 	/**
 	 * データをファイルに出力するクラス
 	 * 
@@ -37,7 +43,6 @@ public class OutputOrderData {
 	 */
 	public static int outputTextFile(String anOutputDir,
 			Map<String, String> anOrdersDataMap) throws KadaiException {
-		int count = 0;
 
 		if(null == anOutputDir){
 			throw new KadaiException(ErrorCode.QUESTION1_FILE_OUTPUT);
@@ -46,15 +51,15 @@ public class OutputOrderData {
 			throw new KadaiException(ErrorCode.SALES_ORDER_FILE_INPUT);
 		}
 		
-		sortMap(anOrdersDataMap);
+		List<Map.Entry<String, String>> entries = sortMap(anOrdersDataMap);
 		
-		try(BufferedWriter bw= new BufferedWriter(new FileWriter(anOutputDir
-				+ OUTPUT_FILE_NAME));) {
+		
+		try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(new File(anOutputDir, OUTPUT_FILE_NAME)), ENCODING));) {
 
-			for (Map.Entry<String, String> data : anOrdersDataMap.entrySet()) {
-				bw.write(data.getKey() + " , " + data.getValue());
+			for (Map.Entry<String, String> data : entries) {
+				bw.write(data.getKey() + "," + data.getValue());
 				bw.newLine();
-				++count;
 			}
 
 			bw.flush();
@@ -62,7 +67,7 @@ public class OutputOrderData {
 			throw new KadaiException(ErrorCode.QUESTION1_FILE_OUTPUT);
 		}
 
-		return count;
+		return anOrdersDataMap.size();
 	}
 
 	/**
@@ -70,18 +75,23 @@ public class OutputOrderData {
 	 * 
 	 * @param aSortMap
 	 *            ソートするマップ
+	 * @return ソート済みリスト
 	 */
-	public static void sortMap(Map<String, String> aSortMap) {
+	public static List<Map.Entry<String, String>> sortMap(Map<String, String> aSortMap) {
 		List<Map.Entry<String, String>> entries = new ArrayList<Map.Entry<String, String>>(
 				aSortMap.entrySet());
+
 		Collections.sort(entries, new Comparator<Map.Entry<String, String>>() {
 
 			@Override
 			public int compare(Entry<String, String> entry1,
 					Entry<String, String> entry2) {
-				return entry2.getValue().compareTo(entry1.getValue());
+				int num = entry1.getValue().compareTo(entry2.getValue());
+				return num;
 			}
 		});
+		
+		return entries;
 
 	}
 }

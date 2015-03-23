@@ -11,11 +11,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 課題のUtilクラス
+ * 
  * @author wakahara
  *
  */
@@ -23,21 +22,25 @@ public class KadaiUtil {
 
 	/**
 	 * ファイルの読み込みメソッド
-	 * @param aFilePath : ファイルパス
-	 * @param anEncoding : エンコード
+	 * 
+	 * @param aFilePath
+	 *            : ファイルパス
+	 * @param anEncoding
+	 *            : エンコード
 	 * @return : ファイルの1行分を1要素としたリスト
 	 * @throws IOException
 	 */
-	public static List<String> readFile(String aFilePath, String anEncoding) throws IOException{
-		
+	public static List<String> readFile(String aFilePath, String anEncoding)
+			throws IOException {
+
 		// 引数nullチェック
-		if(null == aFilePath){
+		if (null == aFilePath) {
 			throw new FileNotFoundException();
 		}
-		if(null == anEncoding){
+		if (null == anEncoding) {
 			throw new IOException();
 		}
-		
+
 		FileInputStream inputStream = null;
 		try {
 			inputStream = new FileInputStream(aFilePath);
@@ -52,6 +55,9 @@ public class KadaiUtil {
 			if (3 <= is.available()) {
 				// BOMチェック
 				byte b[] = { 0, 0, 0 };
+				if(!isUTF8(b, anEncoding)){
+					throw new IOException();
+				}
 				is.read(b, 0, 3);
 				if ((byte) 0xEF != b[0] || (byte) 0xBB != b[1]
 						|| (byte) 0xBF != b[2]) {
@@ -70,41 +76,37 @@ public class KadaiUtil {
 			while (null != (str = fileReader.readLine())) {
 				textList.add(str);
 			}
-			
+
 			fileReader.close();
 
 			return textList;
 
-		}finally{
-			try{
-				if(null != inputStream){
+		} finally {
+			try {
+				if (null != inputStream) {
 					inputStream.close();
 				}
-			}catch (IOException e){
+			} catch (IOException e) {
 				throw new IOException();
 			}
 		}
 	}
-
+	
 	/**
-	 * ファイル名から拡張子が指定のものかどうかをチェックするメソッド
-	 * @param aFileName	：ファイル名
-	 * @param aSuffix	：指定拡張子
-	 * @return 拡張子が指定のものならばTrue,それ以外はFalse
+	 * UTF-8かどうかを判定するメソッド
+	 * @param src
+	 * @param encode
+	 * @return　UTF-8ならTRUE
 	 */
-	public static boolean checkSuffix(String aFileName, String aSuffix) {
-		// ファイル名nullチェック
-		if (null == aFileName) {
+	private static boolean isUTF8(byte[] src ,String encode){
+		if(null == src || null == encode){
 			return false;
 		}
-		// 拡張子名nullチェック
-		if (null == aSuffix){
+		try{
+			byte[] testEncoding = new String(src, encode).getBytes(encode);
+			return Arrays.equals(testEncoding, src);
+		}catch(UnsupportedEncodingException e){
 			return false;
-		}
-		//判定するパターンを生成
-        Pattern ptn = Pattern.compile(".*"+aSuffix+"$");
-        Matcher match = ptn.matcher(aFileName);
-
-		return match.find();
+		} 
 	}
 }

@@ -48,23 +48,23 @@ public class KadaiTest201411_Lv1 extends AbstractTestKadaiForFileLv1{
 
 	@Override
 	protected void executeValidTest(String aFolderName, int aRecordCount) {
-		try {
+		//try {
 			Assert.assertEquals(aRecordCount, Kadai.countOrder(getInputDirPath() + aFolderName + "\\", getOutputDirPath() + aFolderName + "\\"));
 			compareToSample(aFolderName, "ordercount.txt");
-		} catch (KadaiException e) {
-			throw new RuntimeException(e);
-		}
+		//} catch (KadaiException e) {
+			//throw new RuntimeException(e);
+		//}
 
 	}
 
 	@Override
 	protected void executeInvalidTest(String anInputPath, String anOutputPath, int anErrorCode) {
-		try {
+		//try {
 			Kadai.countOrder(anInputPath, anOutputPath);
 			fail("なぜ成功する？");
-		} catch (KadaiException e) {
-			assertEquals(anErrorCode, e.getErrorCode());
-		}
+		//} catch (KadaiException e) {
+			//assertEquals(anErrorCode, e.getErrorCode());
+		//}
 	}
 
 	@Override
